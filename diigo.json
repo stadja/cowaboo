@@ -1,0 +1,305 @@
+{
+  "models": {
+    "Bookmark": {
+      "id": "Bookmark",
+      "properties": {
+        "tags": {
+          "type": "string",
+          "description": "1-250, tags separated by comma"
+        },
+        "url": {
+          "required": true,
+          "type": "string",
+          "description": "1-250, the url of the bookmark"
+        },
+        "created_at": {
+          "type": "dateTime",
+          "description": "ex: 2008/04/30 06:28:54 +0800"
+        },
+        "title": {
+          "required": true,
+          "type": "string",
+          "description": "1-250, the title of the bookmark"
+        },
+        "updated_at": {
+          "type": "dateTime",
+          "description": "ex: 2008/04/30 06:28:54 +0800"
+        },
+        "comments": {
+          "type": "array"
+        },
+        "user": {
+          "type": "string"
+        },
+        "shared": {
+          "enum": [
+            "yes",
+            "no"
+          ],
+          "type": "string",
+          "description": "- yes means the bookmark is public - no means the bookmark is private"
+        },
+        "annotations": {
+          "type": "array"
+        },
+        "desc": {
+          "type": "string",
+          "description": "1-250, the description for the bookmark"
+        }
+      }
+    },
+    "Bookmarks": {
+      "id": "Bookmarks",
+      "properties": {
+        "": {
+          "items": {
+            "$ref": "Bookmark"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "Response": {
+      "id": "Response",
+      "properties": {
+        "message": {
+          "type": "string",
+          "defaultValue": "added 1 bookmark(s)"
+        }
+      }
+    }
+  },
+  "apis": [
+    {
+      "operations": [
+        {
+          "nickname": "getBookmarks",
+          "summary": "Returns a list of bookmarks satisfying various criteria.",
+          "type": "Bookmarks",
+          "method": "GET",
+          "parameters": [
+            {
+              "description": "the username of whose bookmarks to fetch",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "user"
+            },
+            {
+              "description": "the start offset of the bookmarks to fetch starting from 0, defaults to 0",
+              "paramType": "query",
+              "required": false,
+              "allowMultiple": false,
+              "type": "number",
+              "defaultValue": 0,
+              "name": "start"
+            },
+            {
+              "paramType": "query",
+              "description": "the number of bookmarks to fetch, defaults to 10, max:100",
+              "defaultValue": 10,
+              "required": false,
+              "maximum": 100,
+              "type": "number",
+              "allowMultiple": false,
+              "name": "count"
+            },
+            {
+              "enum": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "paramType": "query",
+              "description": "determines the order of bookmarks to fetch, 0: created_at, 1: updated_at, 2: popularity, 3: hot, defaults to 0",
+              "defaultValue": 0,
+              "required": false,
+              "maximum": 3,
+              "minimum": 0,
+              "type": "number",
+              "allowMultiple": false,
+              "name": "sort"
+            },
+            {
+              "description": "only bookmarks with specified tags will be returned. multiple tags are separated by comma",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tags"
+            },
+            {
+              "enum": [
+                "public",
+                "all"
+              ],
+              "paramType": "query",
+              "name": "filter",
+              "defaultValue": "public",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "description": "public: only returns public bookmarks; all: returns all bookmarks including private ones, defaults to public"
+            },
+            {
+              "description": "the list name of a bookmark list, when specified, user must be also specified",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "list"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "OK: Success!",
+              "code": 200
+            },
+            {
+              "message": "Bad Request: Some request parameters are invalid or the API rate limit is exceeded.",
+              "code": 400
+            },
+            {
+              "message": "Not Authorized: Authentication credentials are missing or invalid.",
+              "code": 401
+            },
+            {
+              "message": "Forbidden: The request has been refused because of the lack of proper permission.",
+              "code": 403
+            },
+            {
+              "message": "Not Found: Either you're requesting an invalid URI or the resource in question doesn't exist (e.g. no such user).",
+              "code": 404
+            },
+            {
+              "message": "Internal Server Error: Something is broken.",
+              "code": 500
+            },
+            {
+              "message": "Bad Gateway: Diigo is down or being upgraded.",
+              "code": 502
+            },
+            {
+              "message": "Service Unavailable: The Diigo servers are too busy to server your request. Please try again later.",
+              "code": 503
+            }
+          ]
+        },
+
+        {
+          "nickname": "saveBookmarks",
+          "notes": "For the moment, you can only save Bookmark as the 'stadja' user",
+          "summary": "Saves a bookmark for the authenticated user.",
+          "type": "Response",
+          "method": "Post",
+          "parameters": [
+            {
+              "description": "1-250, the title of the bookmark",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "title"
+            },
+            {
+              "description": "1-250, the url of the bookmark",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "url"
+            },
+            {
+              "description": "- yes means the bookmark is public - no means the bookmark is private",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "shared",
+              "enum": ["yes", "no"],
+              "defaultValue": "no"
+            },
+            {
+              "description": "1-250, tags separated by comma",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tags"
+            },
+            {
+              "description": "1-250, the description for the bookmark",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "desc"
+            },
+            {
+              "description": "specifies whether the bookmark is \"unread\"",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "readLater",
+              "enum": ["yes", "no"],
+              "defaultValue": "no"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "OK: Success!",
+              "code": 200
+            },
+            {
+              "message": "Bad Request: Some request parameters are invalid or the API rate limit is exceeded.",
+              "code": 400
+            },
+            {
+              "message": "Not Authorized: Authentication credentials are missing or invalid.",
+              "code": 401
+            },
+            {
+              "message": "Forbidden: The request has been refused because of the lack of proper permission.",
+              "code": 403
+            },
+            {
+              "message": "Not Found: Either you're requesting an invalid URI or the resource in question doesn't exist (e.g. no such user).",
+              "code": 404
+            },
+            {
+              "message": "Internal Server Error: Something is broken.",
+              "code": 500
+            },
+            {
+              "message": "Bad Gateway: Diigo is down or being upgraded.",
+              "code": 502
+            },
+            {
+              "message": "Service Unavailable: The Diigo servers are too busy to server your request. Please try again later.",
+              "code": 503
+            }
+          ]
+        }
+      ],
+      "path": "/diigo/bookmarks"
+    }
+  ],
+  "authorizations": {
+    "basic": {
+      "type": "apiKey",
+      "passAs": "query",
+      "keyname": "Authorization"
+    }
+  },
+  "consumes": [
+    "application/json",
+    "application/xml"
+  ],
+  "resourcePath": "/diigo",
+  "produces": [
+    "application/json"
+  ]
+}
