@@ -1,0 +1,1780 @@
+{
+  "produces": [
+    "application/json",
+    "application/xml"
+  ],
+  "models": {
+    "Item": {
+      "id": "Item",
+      "properties": {
+        "links": {
+          "self": {
+            "href": "",
+            "type": ""
+          },
+          "alternate": {
+            "href": "",
+            "type": ""
+          }
+        },
+        "library": {
+          "type": "",
+          "id": "",
+          "links": {
+            "alternate": {
+              "href": "",
+              "type": ""
+            }
+          },
+          "name": ""
+        },
+        "version": "",
+        "meta": {
+          "numChildren": ""
+        },
+        "key": "",
+        "data": {
+          "extra": "",
+          "language": "",
+          "dateAdded": "",
+          "itemType": "",
+          "shortTitle": "",
+          "title": "",
+          "url": "",
+          "rights": "",
+          "relations": [],
+          "accessDate": "",
+          "version": "",
+          "websiteType": "",
+          "key": "",
+          "date": "",
+          "collections": [],
+          "abstractNote": "",
+          "creators": [],
+          "dateModified": "",
+          "tags": [
+            {
+              "tag": ""
+            }
+          ],
+          "websiteTitle": ""
+        }
+      }
+    }
+  },
+  "basePath": "http://stadja.net:81/rest/zotero",
+  "apis": [
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "defaultValue": "2214605",
+              "description": "User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses.",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "userId"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            }
+          ],
+          "nickname": "getGroupsFromUserId",
+          "notes": "The set of groups the current API key has access to, including public groups the key owner belongs to even if the key doesn't have explicit permissions for them.",
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "summary": "The set of groups the current API key has access to",
+          "type": "Items",
+          "method": "GET"
+        }
+      ],
+      "path": "/users/{userId}/groups"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            }
+          ],
+          "nickname": "getItems",
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "summary": "The set of all items in the library.",
+          "type": "Items",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/items"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            }
+          ],
+          "nickname": "getTopItems",
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "summary": "The set of all top-level items in the library.",
+          "type": "Items",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/items/top"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            }
+          ],
+          "nickname": "getTrashItems",
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "summary": "The set of items in the trash.",
+          "type": "Items",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/items/trash"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "A specific Item in the library.",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemKey"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            }
+          ],
+          "nickname": "getSpecificItems",
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "summary": "The set of all items in the library.",
+          "type": "Item",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/items/{itemKey}"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "A specific Item in the library.",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemKey"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            }
+          ],
+          "nickname": "getChildItemsOfSpecificItem",
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "summary": "The set of all child items under a specific item.",
+          "type": "Items",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/items/{itemKey}/children"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "A specific Item in the library.",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemKey"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            }
+          ],
+          "nickname": "getTagsOfSpecificItem",
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "summary": "The set of all tags associated with a specific item.",
+          "type": "Tags",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/items/{itemKey}/tags"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            }
+          ],
+          "nickname": "getTags",
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "summary": "The set of all tags in the library.",
+          "type": "Tags",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/tags"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "Url encoded tag name",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tagName"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            }
+          ],
+          "nickname": "getSPecificTag",
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "summary": "The set of tags (i.e., of all types) matching a specific name.",
+          "type": "Tags",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/tags/{tagName}"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "nickname": "getCollections",
+          "summary": "The set of collections in the library.",
+          "type": "Collections",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/collections"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "nickname": "getTopCollections",
+          "summary": "The set of all top-level collections in the library.",
+          "type": "Collections",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/collections/top"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "A specific collection in the library",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "collectionKey"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "nickname": "getSpecificCollection",
+          "summary": "A specific collection in the library.",
+          "type": "Collections",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/collections/{collectionKey}"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "A specific collection in the library",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "collectionKey"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "nickname": "getSpecificCollectionSubCollections",
+          "summary": "The set of subcollections within a specific collection in the library.",
+          "type": "Collections",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/collections/{collectionKey}/collections"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "A specific collection in the library",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "collectionKey"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "nickname": "getSpecificCollectionItems",
+          "summary": "The set of all items within a specific collection in the library.",
+          "type": "Items",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/collections/{collectionKey}/items"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "A specific collection in the library",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "collectionKey"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "nickname": "getSpecificCollectionTopItems",
+          "summary": "The set of top-level items within a specific collection in the library.",
+          "type": "Items",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/collections/{collectionKey}/items/top"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "A specific collection in the library",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "collectionKey"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "nickname": "getSpecificCollectionTags",
+          "summary": "The set of tags within a specific collection in the library.",
+          "type": "Tags",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/collections/{collectionKey}/tags"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "nickname": "getSearches",
+          "summary": "The set of all saved searches in the library.",
+          "type": "Searches",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/searches"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "A specific saved search in the library.",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "searchKey"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "nickname": "getSpecificSearch",
+          "summary": "A specific saved search in the library.",
+          "type": "Search",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/searches/{searchKey}"
+    }
+  ],
+  "resourcePath": "/items",
+  "consumes": [
+    "application/json",
+    "application/xml"
+  ]
+}
