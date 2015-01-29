@@ -1,0 +1,377 @@
+{
+  "resourcePath": "/{api_name}",
+  "produces": [
+    "application/json",
+    "application/xml"
+  ],
+  "consumes": [
+    "application/json",
+    "application/xml"
+  ],
+  "apis": [
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "the comma separated list of services from which you want to get the items",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": true,
+              "name": "services",
+              "enum": [
+                "diigo",
+                "zotero"
+              ],
+              "defaultValue": "diigo,zotero"
+            },
+            {
+              "description": "If diigo search: the diigo username of whose bookmarks to fetch",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "diigo_username",
+              "defaultValue": "cowaboo"
+            },
+            {
+              "description": "If diigo search: <a href=\"http://en.wikipedia.org/wiki/Basic_access_authentication\" target=\"_blank\">the basic authentication key</a> of the usern of whose bookmarks to fetch.<br/>For the cowaboo user it is <pre>basic Y293YWJvbzpQYXNzd29yZCA0IGNvd2Fib28=</pre>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "diigo_access_key",
+              "defaultValue": "basic Y293YWJvbzpQYXNzd29yZCA0IGNvd2Fib28=",
+              "defaultValue": "cowaboo"
+            },
+            {
+              "description": "If zotero search: Do you whant to make a search on a group or a user ?",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "zotero_users_or_groups",
+              "defaultValue": "groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "description": "If zotero search: <ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2268355 for cowaboo user id)</li></ul>",
+              "defaultValue": "303941",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "zotero_elementId"
+            },
+            {
+              "description": "If zotero search: The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "zotero_api_key"
+            },
+            {
+              "description": "only bookmarks with specified tags will be returned. multiple tags are separated by comma",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tags"
+            }
+          ],
+          "nickname": "getBookmarks",
+          "notes": "",
+          "responseMessages": [],
+          "summary": "Get items / bookmarks",
+          "type": "Bookmarks",
+          "method": "GET"
+        },
+        {
+          "parameters": [
+            {
+              "description": "the comma separated list of services to which you want to post the item",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": true,
+              "name": "services",
+              "enum": [
+                "diigo",
+                "zotero"
+              ],
+              "defaultValue": "diigo,zotero"
+            },
+            {
+              "description": "If diigo creation: <a href=\"http://en.wikipedia.org/wiki/Basic_access_authentication\" target=\"_blank\">the basic authentication key</a> of the user in witch library you want to post:<br/>for the cowaboo user it is <pre>basic Y293YWJvbzpQYXNzd29yZCA0IGNvd2Fib28=</pre>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "diigo_access_key",
+              "defaultValue": "basic Y293YWJvbzpQYXNzd29yZCA0IGNvd2Fib28=",
+              "defaultValue": "cowaboo"
+            },
+            {
+              "description": "If zotero creation: Do you whant to create a bookmark as a group or as a user ?",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "zotero_users_or_groups",
+              "defaultValue": "groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "description": "If zotero creation: <ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2268355 for cowaboo user id)</li></ul>",
+              "defaultValue": "303941",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "zotero_elementId"
+            },
+            {
+              "description": "If zotero creation: The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "zotero_api_key"
+            },
+            {
+              "description": "1-250, the title of the bookmark",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "title"
+            },
+            {
+              "description": "1-250, the url of the bookmark",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "url"
+            },
+            {
+              "description": "1-250, tags separated by comma",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tags"
+            },
+            {
+              "description": "1-250, the description for the bookmark",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "desc"
+            }
+          ],
+          "nickname": "createBookmarks",
+          "notes": "",
+          "responseMessages": [],
+          "summary": "Create an item / bookmark",
+          "type": "Bookmarks",
+          "method": "Post"
+        }
+      ],
+      "path": "/bookmarks"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "the comma separated list of services from which you want to get the tags",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": true,
+              "name": "services",
+              "enum": [
+                "diigo",
+                "zotero"
+              ],
+              "defaultValue": "diigo,zotero"
+            },
+            {
+              "description": "If diigo search: the diigo username of whose bookmarks to fetch",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "diigo_username",
+              "defaultValue": "cowaboo"
+            },
+            {
+              "description": "If zotero search: Do you whant to make a search on a group or a user ?",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "zotero_users_or_groups",
+              "defaultValue": "groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "description": "If zotero search: <ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2268355 for cowaboo user id)</li></ul>",
+              "defaultValue": "303941",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "zotero_elementId"
+            },
+            {
+              "description": "If zotero search: The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "zotero_api_key"
+            }
+          ],
+          "nickname": "getTags",
+          "notes": "",
+          "responseMessages": [],
+          "summary": "Get Tags",
+          "type": "Bookmarks",
+          "method": "GET"
+        }
+      ],
+      "path": "/tags"
+    }
+  ],
+  "basePath": "http://stadja.net:81/rest/cowaboo",
+  "models": {
+    "Bookmarks": {
+      "id": "Bookmarks",
+      "properties": {
+        "merged": {
+          "items": {
+            "$ref": "Bookmark"
+          },
+          "required": true,
+          "type": "array"
+        },
+        "unmerged": {
+          "items": {
+            "$ref": "service specific bookmarks"
+          },
+          "required": true,
+          "type": "array"
+        }
+      }
+    },
+    "Bookmark": {
+      "id": "Bookmark",
+      "properties": {
+        "title": {
+          "required": true,
+          "type": "string"
+        },
+        "url": {
+          "required": true,
+          "type": "string"
+        },
+        "description": {
+          "required": true,
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "required": true,
+          "type": "array"
+        },
+        "users": {
+          "items": {},
+          "required": true,
+          "type": "array"
+        },
+        "services": {
+          "items": {
+            "type": "string"
+          },
+          "required": true,
+          "type": "array"
+        },
+        "created_at": {
+          "required": true,
+          "type": "dateTime"
+        },
+        "updated_at": {
+          "required": true,
+          "type": "dateTime"
+        },
+        "notes": {
+          "items": {},
+          "required": true,
+          "type": "array"
+        }
+      }
+    },
+    "note": {
+      "id": "note",
+      "properties": {
+        "userid": {
+          "required": true,
+          "type": "string"
+        },
+        "user": {
+          "required": true,
+          "type": "string"
+        },
+        "service": {
+          "required": true,
+          "type": "string"
+        },
+        "content": {
+          "required": true,
+          "type": "string"
+        },
+        "created_at": {
+          "required": true,
+          "type": "dateTime"
+        }
+      }
+    },
+    "user": {
+      "id": "user",
+      "properties": {
+        "id": {
+          "required": true,
+          "type": "string"
+        },
+        "name": {
+          "required": true,
+          "type": "string"
+        },
+        "service": {
+          "required": true,
+          "type": "string"
+        },
+        "type": {
+          "required": true,
+          "type": "string"
+        }
+      }
+    }
+  }
+}

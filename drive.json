@@ -1,0 +1,66 @@
+{
+  "resourcePath": "/{api_name}",
+  "produces": [
+    "application/json",
+    "application/xml"
+  ],
+  "consumes": [
+    "application/json",
+    "application/xml"
+  ],
+  "apis": [
+    {
+      "operations": [
+        {
+          "parameters": [{
+              "defaultValue": "112lVHELmdM1iU51mmEx0o5tXN73CLSnYrnqJ_5TKSYg",
+              "description": "The ID of the file",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "fileId"
+            },{
+              "defaultValue": "zotero",
+              "description": "test",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "app_name"
+            }],
+          "nickname": "listComments",
+          "notes": "doesn't work right now",
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            }
+          ],
+          "summary": "Lists a file's comments - doesn't work right now",
+          "type": "ItemTypes",
+          "method": "GET",
+          "authorizations": {
+            "oauth2": [
+              {
+                "scope": "https://www.googleapis.com/auth/drive",
+                "description": "Full, permissive scope to access all of a user's files. Request this scope only when it is strictly necessary. Tokens with scope https://docs.google.com/feeds are accepted and treated the same as tokens with scope https://www.googleapis.com/auth/drive."
+              },
+              {
+                "scope": "https://www.googleapis.com/auth/drive.readonly",
+                "description": "Allows read-only access to file metadata and file content"
+              }
+            ]
+          }
+        }
+      ],
+      "path": "/files/{fileId}/comments"
+    }
+  ],
+  "basePath": "http://stadja.net:81/rest/drive",
+  "models": {}
+}

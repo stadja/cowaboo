@@ -1,0 +1,4188 @@
+{
+  "produces": [
+    "application/json",
+    "application/xml"
+  ],
+  "models": {},
+  "basePath": "http://stadja.net:81/rest/zotero",
+  "apis": [
+    {
+      "operations": [
+        {
+          "parameters": [],
+          "nickname": "getItemTypes",
+          "notes": "",
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            }
+          ],
+          "summary": "Getting All Item Types",
+          "type": "ItemTypes",
+          "method": "GET"
+        }
+      ],
+      "path": "/itemTypes"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "defaultValue": "webpage",
+              "description": "Get all the item types by making <a href=\"#!/zotero/getItemTypes\" target=\"_blank\">an item type request</a>",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemType"
+            }
+          ],
+          "nickname": "getItemTemplate",
+          "notes": "",
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            }
+          ],
+          "summary": "Getting a Template for a New Item",
+          "type": "Item",
+          "method": "GET"
+        }
+      ],
+      "path": "/items/new"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "defaultValue": "2214605",
+              "description": "User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses.",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "userId"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            },
+            {
+              "description": "Search parameter: Quick search. Searches titles and individual creator fields by default. Use the qmode parameter to change the mode. Currently supports phrase searching only.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "q"
+            },
+            {
+              "enum": [
+                "dateAdded",
+                "dateModified",
+                "title",
+                "creator",
+                "type",
+                "date",
+                "publisher",
+                "publicationTitle",
+                "journalAbbreviation",
+                "language",
+                "accessDate",
+                "libraryCatalog",
+                "callNumber",
+                "rights",
+                "addedBy",
+                "numItems"
+              ],
+              "defaultValue": "dateModified",
+              "description": "The name of the field by which entries are sorted.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "sort"
+            },
+            {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "The sorting direction of the field specified in the sort parameter.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "direction"
+            },
+            {
+              "description": "The maximum number of results to return with a single request",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "allowMultiple": false,
+              "name": "limit"
+            },
+            {
+              "description": "The index of the first result. Combine with the limit parameter to select a slice of the available results",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 0,
+              "minimum": 0,
+              "allowMultiple": false,
+              "name": "start"
+            }
+          ],
+          "nickname": "getGroupsFromUserId",
+          "notes": "The set of groups the current API key has access to, including public groups the key owner belongs to even if the key doesn't have explicit permissions for them.",
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "summary": "The set of groups the current API key has access to",
+          "type": "Items",
+          "method": "GET"
+        }
+      ],
+      "path": "/users/{userId}/groups"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "key"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            },
+            {
+              "description": "Search parameter: Item type search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemType"
+            },
+            {
+              "description": "Search parameter: Quick search. Searches titles and individual creator fields by default. Use the qmode parameter to change the mode. Currently supports phrase searching only.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "q"
+            },
+            {
+              "enum": ["titleCreatorYear", "everything"],
+              "defaultValue": "titleCreatorYear",
+              "description": "Search parameter: Quick search mode. To include full-text content in the search, use everything. Searching of other fields will be possible in the future.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "qmode"
+            },
+            {
+              "description": "Search parameter: Return only objects modified after the specified library verson.",
+              "paramType": "query",
+              "type": "integer",
+              "defaultValue": 0,
+              "required": false,
+              "allowMultiple": false,
+              "name": "since"
+            },
+            {
+              "description": "Search parameter: Tag search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tag"
+            },
+            {
+              "enum": [
+                "dateAdded",
+                "dateModified",
+                "title",
+                "creator",
+                "type",
+                "date",
+                "publisher",
+                "publicationTitle",
+                "journalAbbreviation",
+                "language",
+                "accessDate",
+                "libraryCatalog",
+                "callNumber",
+                "rights",
+                "addedBy",
+                "numItems"
+              ],
+              "defaultValue": "dateModified",
+              "description": "The name of the field by which entries are sorted.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "sort"
+            },
+            {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "The sorting direction of the field specified in the sort parameter.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "direction"
+            },
+            {
+              "description": "The maximum number of results to return with a single request",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "allowMultiple": false,
+              "name": "limit"
+            },
+            {
+              "description": "The index of the first result. Combine with the limit parameter to select a slice of the available results",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 0,
+              "minimum": 0,
+              "allowMultiple": false,
+              "name": "start"
+            }
+          ],
+          "nickname": "getItems",
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "summary": "The set of all items in the library.",
+          "type": "Items",
+          "method": "GET"
+        },
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to post as a group or as an user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "key"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            },
+            {
+              "name": "body",
+              "description": "Get the new item description by calling <a href=\"#!/zotero/getItemTemplate\" target=\"_blank\">an item template request</a>. Then modify it and resubmit it to the server in an array.",
+              "required": true,
+              "type": "Item",
+              "paramType": "body",
+              "defaultValue": "[\n  {\n    \"itemType\": \"webpage\",\n    \"title\": \"\",\n    \"creators\": [\n      {\n        \"creatorType\": \"author\",\n        \"firstName\": \"\",\n        \"lastName\": \"\"\n      }\n    ],\n    \"abstractNote\": \"\",\n    \"websiteTitle\": \"\",\n    \"websiteType\": \"\",\n    \"date\": \"\",\n    \"shortTitle\": \"\",\n    \"url\": \"\",\n    \"accessDate\": \"\",\n    \"language\": \"\",\n    \"rights\": \"\",\n    \"extra\": \"\",\n    \"tags\": [],\n    \"collections\": [],\n    \"relations\": []\n  }\n]"
+            }
+          ],
+          "nickname": "createItem",
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Conflict: The target library is locked.",
+              "code": 409
+            },
+            {
+              "message": "Precondition Failed: The provided Zotero-Write-Token has already been submitted.",
+              "code": 412
+            },
+            {
+              "message": "Request Entity Too Large: Too many items submitted",
+              "code": 413
+            }
+          ],
+          "notes": "When creating a new item, first get an empty JSON for the item type with <a href=\"#!/zotero/getItemTemplate\" target=\"_blank\">an item template request</a>. Then modify it and resubmit it to the server in an array.",
+          "summary": "Create a new item.",
+          "method": "Post"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/items"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "key"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            },
+            {
+              "description": "Search parameter: Item type search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemType"
+            },
+            {
+              "description": "Search parameter: Quick search. Searches titles and individual creator fields by default. Use the qmode parameter to change the mode. Currently supports phrase searching only.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "q"
+            },
+            {
+              "enum": ["titleCreatorYear", "everything"],
+              "defaultValue": "titleCreatorYear",
+              "description": "Search parameter: Quick search mode. To include full-text content in the search, use everything. Searching of other fields will be possible in the future.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "qmode"
+            },
+            {
+              "description": "Search parameter: Return only objects modified after the specified library verson.",
+              "paramType": "query",
+              "type": "integer",
+              "defaultValue": 0,
+              "required": false,
+              "allowMultiple": false,
+              "name": "since"
+            },
+            {
+              "description": "Search parameter: Tag search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tag"
+            },
+            {
+              "enum": [
+                "dateAdded",
+                "dateModified",
+                "title",
+                "creator",
+                "type",
+                "date",
+                "publisher",
+                "publicationTitle",
+                "journalAbbreviation",
+                "language",
+                "accessDate",
+                "libraryCatalog",
+                "callNumber",
+                "rights",
+                "addedBy",
+                "numItems"
+              ],
+              "defaultValue": "dateModified",
+              "description": "The name of the field by which entries are sorted.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "sort"
+            },
+            {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "The sorting direction of the field specified in the sort parameter.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "direction"
+            },
+            {
+              "description": "The maximum number of results to return with a single request",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "allowMultiple": false,
+              "name": "limit"
+            },
+            {
+              "description": "The index of the first result. Combine with the limit parameter to select a slice of the available results",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 0,
+              "minimum": 0,
+              "allowMultiple": false,
+              "name": "start"
+            }
+          ],
+          "nickname": "getTopItems",
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "summary": "The set of all top-level items in the library.",
+          "type": "Items",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/items/top"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "key"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            },
+            {
+              "description": "Search parameter: Item type search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemType"
+            },
+            {
+              "description": "Search parameter: Quick search. Searches titles and individual creator fields by default. Use the qmode parameter to change the mode. Currently supports phrase searching only.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "q"
+            },
+            {
+              "enum": ["titleCreatorYear", "everything"],
+              "defaultValue": "titleCreatorYear",
+              "description": "Search parameter: Quick search mode. To include full-text content in the search, use everything. Searching of other fields will be possible in the future.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "qmode"
+            },
+            {
+              "description": "Search parameter: Return only objects modified after the specified library verson.",
+              "paramType": "query",
+              "type": "integer",
+              "defaultValue": 0,
+              "required": false,
+              "allowMultiple": false,
+              "name": "since"
+            },
+            {
+              "description": "Search parameter: Tag search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tag"
+            },
+            {
+              "enum": [
+                "dateAdded",
+                "dateModified",
+                "title",
+                "creator",
+                "type",
+                "date",
+                "publisher",
+                "publicationTitle",
+                "journalAbbreviation",
+                "language",
+                "accessDate",
+                "libraryCatalog",
+                "callNumber",
+                "rights",
+                "addedBy",
+                "numItems"
+              ],
+              "defaultValue": "dateModified",
+              "description": "The name of the field by which entries are sorted.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "sort"
+            },
+            {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "The sorting direction of the field specified in the sort parameter.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "direction"
+            },
+            {
+              "description": "The maximum number of results to return with a single request",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "allowMultiple": false,
+              "name": "limit"
+            },
+            {
+              "description": "The index of the first result. Combine with the limit parameter to select a slice of the available results",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 0,
+              "minimum": 0,
+              "allowMultiple": false,
+              "name": "start"
+            }
+          ],
+          "nickname": "getTrashItems",
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "summary": "The set of items in the trash.",
+          "type": "Items",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/items/trash"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "key"
+            },
+            {
+              "description": "A specific Item in the library.",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemKey"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            },
+            {
+              "description": "Search parameter: Item type search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemType"
+            },
+            {
+              "description": "Search parameter: Quick search. Searches titles and individual creator fields by default. Use the qmode parameter to change the mode. Currently supports phrase searching only.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "q"
+            },
+            {
+              "enum": ["titleCreatorYear", "everything"],
+              "defaultValue": "titleCreatorYear",
+              "description": "Search parameter: Quick search mode. To include full-text content in the search, use everything. Searching of other fields will be possible in the future.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "qmode"
+            },
+            {
+              "description": "Search parameter: Return only objects modified after the specified library verson.",
+              "paramType": "query",
+              "type": "integer",
+              "defaultValue": 0,
+              "required": false,
+              "allowMultiple": false,
+              "name": "since"
+            },
+            {
+              "description": "Search parameter: Tag search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tag"
+            },
+            {
+              "enum": [
+                "dateAdded",
+                "dateModified",
+                "title",
+                "creator",
+                "type",
+                "date",
+                "publisher",
+                "publicationTitle",
+                "journalAbbreviation",
+                "language",
+                "accessDate",
+                "libraryCatalog",
+                "callNumber",
+                "rights",
+                "addedBy",
+                "numItems"
+              ],
+              "defaultValue": "dateModified",
+              "description": "The name of the field by which entries are sorted.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "sort"
+            },
+            {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "The sorting direction of the field specified in the sort parameter.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "direction"
+            },
+            {
+              "description": "The maximum number of results to return with a single request",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "allowMultiple": false,
+              "name": "limit"
+            },
+            {
+              "description": "The index of the first result. Combine with the limit parameter to select a slice of the available results",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 0,
+              "minimum": 0,
+              "allowMultiple": false,
+              "name": "start"
+            }
+          ],
+          "nickname": "getSpecificItem",
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "summary": "The set of all items in the library.",
+          "type": "Item",
+          "method": "GET"
+        },
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to patch as a group or as an user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "key"
+            },
+            {
+              "description": "A specific Item in the library.",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemKey"
+            },
+            {
+              "name": "body",
+              "description": "First, <a href=\"#!/zotero/getSpecificItem\" target=\"_blank\">retrieve the current version of the item</a><br/>The editable data will be found in the data property in the response.<br/>Copy all the data object, edit the values and send it to the server.",
+              "required": true,
+              "type": "Item",
+              "paramType": "body"
+            }
+          ],
+          "nickname": "updateItem",
+          "responseMessages": [
+            {
+              "message": "No Content: The item was successfully updated.",
+              "code": 204
+            },
+            {
+              "message": "Bad Request: Invalid type/field; unparseable JSON",
+              "code": 400
+            },
+            {
+              "message": "Conflict: The target library is locked.",
+              "code": 409
+            },
+            {
+              "message": "Precondition Failed: The item has changed since retrieval (i.e., the provided item version no longer matches).",
+              "code": 412
+            }
+          ],
+          "notes": "To update an existing item, first <a href=\"#!/zotero/getSpecificItem\" target=\"_blank\">retrieve the current version of the item</a><br/>The editable data will be found in the data property in the response.<br/>Copy all the data object, edit the values and send it to the server.<br/><br/><strong>Be sure to copy the last version of the item (with the good \"version\" number), otherwise the updating won't work!</strong>",
+          "summary": "Updating an Existing Item.",
+          "method": "Patch"
+        },
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to delete as a group or as an user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "key"
+            },
+            {
+              "description": "A specific Item in the library.",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemKey"
+            },
+            {
+              "name": "If-Unmodified-Since-Version",
+              "description": "Item's current version number",
+              "required": true,
+              "type": "integer",
+              "paramType": "header"
+            }
+          ],
+          "nickname": "deleteItem",
+          "responseMessages": [
+            {
+              "message": "No Content: The item was successfully updated.",
+              "code": 204
+            },
+            {
+              "message": "Conflict: The target library is locked.",
+              "code": 409
+            },
+            {
+              "message": "Precondition Failed: The item has changed since retrieval (i.e., the provided item version no longer matches).",
+              "code": 412
+            }
+          ],
+          "summary": "Doesn't Work - Deleting an item.",
+          "method": "Delete"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/items/{itemKey}"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "key"
+            },
+            {
+              "description": "A specific Item in the library.",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemKey"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            },
+            {
+              "description": "Search parameter: Item type search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemType"
+            },
+            {
+              "description": "Search parameter: Quick search. Searches titles and individual creator fields by default. Use the qmode parameter to change the mode. Currently supports phrase searching only.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "q"
+            },
+            {
+              "enum": ["titleCreatorYear", "everything"],
+              "defaultValue": "titleCreatorYear",
+              "description": "Search parameter: Quick search mode. To include full-text content in the search, use everything. Searching of other fields will be possible in the future.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "qmode"
+            },
+            {
+              "description": "Search parameter: Return only objects modified after the specified library verson.",
+              "paramType": "query",
+              "type": "integer",
+              "defaultValue": 0,
+              "required": false,
+              "allowMultiple": false,
+              "name": "since"
+            },
+            {
+              "description": "Search parameter: Tag search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tag"
+            },
+            {
+              "enum": [
+                "dateAdded",
+                "dateModified",
+                "title",
+                "creator",
+                "type",
+                "date",
+                "publisher",
+                "publicationTitle",
+                "journalAbbreviation",
+                "language",
+                "accessDate",
+                "libraryCatalog",
+                "callNumber",
+                "rights",
+                "addedBy",
+                "numItems"
+              ],
+              "defaultValue": "dateModified",
+              "description": "The name of the field by which entries are sorted.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "sort"
+            },
+            {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "The sorting direction of the field specified in the sort parameter.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "direction"
+            },
+            {
+              "description": "The maximum number of results to return with a single request",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "allowMultiple": false,
+              "name": "limit"
+            },
+            {
+              "description": "The index of the first result. Combine with the limit parameter to select a slice of the available results",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 0,
+              "minimum": 0,
+              "allowMultiple": false,
+              "name": "start"
+            }
+          ],
+          "nickname": "getChildItemsOfSpecificItem",
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "summary": "The set of all child items under a specific item.",
+          "type": "Items",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/items/{itemKey}/children"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "key"
+            },
+            {
+              "description": "A specific Item in the library.",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemKey"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            },
+            {
+              "description": "Search parameter: Item type search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemType"
+            },
+            {
+              "description": "Search parameter: Quick search. Searches titles and individual creator fields by default. Use the qmode parameter to change the mode. Currently supports phrase searching only.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "q"
+            },
+            {
+              "enum": ["titleCreatorYear", "everything"],
+              "defaultValue": "titleCreatorYear",
+              "description": "Search parameter: Quick search mode. To include full-text content in the search, use everything. Searching of other fields will be possible in the future.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "qmode"
+            },
+            {
+              "description": "Search parameter: Return only objects modified after the specified library verson.",
+              "paramType": "query",
+              "type": "integer",
+              "defaultValue": 0,
+              "required": false,
+              "allowMultiple": false,
+              "name": "since"
+            },
+            {
+              "description": "Search parameter: Tag search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tag"
+            },
+            {
+              "enum": [
+                "dateAdded",
+                "dateModified",
+                "title",
+                "creator",
+                "type",
+                "date",
+                "publisher",
+                "publicationTitle",
+                "journalAbbreviation",
+                "language",
+                "accessDate",
+                "libraryCatalog",
+                "callNumber",
+                "rights",
+                "addedBy",
+                "numItems"
+              ],
+              "defaultValue": "dateModified",
+              "description": "The name of the field by which entries are sorted.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "sort"
+            },
+            {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "The sorting direction of the field specified in the sort parameter.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "direction"
+            },
+            {
+              "description": "The maximum number of results to return with a single request",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "allowMultiple": false,
+              "name": "limit"
+            },
+            {
+              "description": "The index of the first result. Combine with the limit parameter to select a slice of the available results",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 0,
+              "minimum": 0,
+              "allowMultiple": false,
+              "name": "start"
+            }
+          ],
+          "nickname": "getTagsOfSpecificItem",
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "summary": "The set of all tags associated with a specific item.",
+          "type": "Tags",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/items/{itemKey}/tags"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "key"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            },
+            {
+              "description": "Search parameter: Item type search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemType"
+            },
+            {
+              "description": "Search parameter: Quick search. Searches titles and individual creator fields by default. Use the qmode parameter to change the mode. Currently supports phrase searching only.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "q"
+            },
+            {
+              "enum": ["titleCreatorYear", "everything"],
+              "defaultValue": "titleCreatorYear",
+              "description": "Search parameter: Quick search mode. To include full-text content in the search, use everything. Searching of other fields will be possible in the future.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "qmode"
+            },
+            {
+              "description": "Search parameter: Return only objects modified after the specified library verson.",
+              "paramType": "query",
+              "type": "integer",
+              "defaultValue": 0,
+              "required": false,
+              "allowMultiple": false,
+              "name": "since"
+            },
+            {
+              "description": "Search parameter: Tag search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tag"
+            },
+            {
+              "enum": [
+                "dateAdded",
+                "dateModified",
+                "title",
+                "creator",
+                "type",
+                "date",
+                "publisher",
+                "publicationTitle",
+                "journalAbbreviation",
+                "language",
+                "accessDate",
+                "libraryCatalog",
+                "callNumber",
+                "rights",
+                "addedBy",
+                "numItems"
+              ],
+              "defaultValue": "dateModified",
+              "description": "The name of the field by which entries are sorted.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "sort"
+            },
+            {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "The sorting direction of the field specified in the sort parameter.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "direction"
+            },
+            {
+              "description": "The maximum number of results to return with a single request",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "allowMultiple": false,
+              "name": "limit"
+            },
+            {
+              "description": "The index of the first result. Combine with the limit parameter to select a slice of the available results",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 0,
+              "minimum": 0,
+              "allowMultiple": false,
+              "name": "start"
+            }
+          ],
+          "nickname": "getTags",
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "summary": "The set of all tags in the library.",
+          "type": "Tags",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/tags"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "key"
+            },
+            {
+              "description": "Url encoded tag name",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tagName"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            },
+            {
+              "description": "Search parameter: Item type search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemType"
+            },
+            {
+              "description": "Search parameter: Quick search. Searches titles and individual creator fields by default. Use the qmode parameter to change the mode. Currently supports phrase searching only.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "q"
+            },
+            {
+              "enum": ["titleCreatorYear", "everything"],
+              "defaultValue": "titleCreatorYear",
+              "description": "Search parameter: Quick search mode. To include full-text content in the search, use everything. Searching of other fields will be possible in the future.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "qmode"
+            },
+            {
+              "description": "Search parameter: Return only objects modified after the specified library verson.",
+              "paramType": "query",
+              "type": "integer",
+              "defaultValue": 0,
+              "required": false,
+              "allowMultiple": false,
+              "name": "since"
+            },
+            {
+              "description": "Search parameter: Tag search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tag"
+            },
+            {
+              "enum": [
+                "dateAdded",
+                "dateModified",
+                "title",
+                "creator",
+                "type",
+                "date",
+                "publisher",
+                "publicationTitle",
+                "journalAbbreviation",
+                "language",
+                "accessDate",
+                "libraryCatalog",
+                "callNumber",
+                "rights",
+                "addedBy",
+                "numItems"
+              ],
+              "defaultValue": "dateModified",
+              "description": "The name of the field by which entries are sorted.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "sort"
+            },
+            {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "The sorting direction of the field specified in the sort parameter.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "direction"
+            },
+            {
+              "description": "The maximum number of results to return with a single request",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "allowMultiple": false,
+              "name": "limit"
+            },
+            {
+              "description": "The index of the first result. Combine with the limit parameter to select a slice of the available results",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 0,
+              "minimum": 0,
+              "allowMultiple": false,
+              "name": "start"
+            }
+          ],
+          "nickname": "getSPecificTag",
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "summary": "The set of tags (i.e., of all types) matching a specific name.",
+          "type": "Tags",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/tags/{tagName}"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "defaultValue": "3k89ouyqI6vYIkTsgPJTK4ek",
+              "name": "key"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            },
+            {
+              "description": "Search parameter: Item type search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemType"
+            },
+            {
+              "description": "Search parameter: Quick search. Searches titles and individual creator fields by default. Use the qmode parameter to change the mode. Currently supports phrase searching only.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "q"
+            },
+            {
+              "enum": ["titleCreatorYear", "everything"],
+              "defaultValue": "titleCreatorYear",
+              "description": "Search parameter: Quick search mode. To include full-text content in the search, use everything. Searching of other fields will be possible in the future.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "qmode"
+            },
+            {
+              "description": "Search parameter: Return only objects modified after the specified library verson.",
+              "paramType": "query",
+              "type": "integer",
+              "defaultValue": 0,
+              "required": false,
+              "allowMultiple": false,
+              "name": "since"
+            },
+            {
+              "description": "Search parameter: Tag search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tag"
+            },
+            {
+              "enum": [
+                "dateAdded",
+                "dateModified",
+                "title",
+                "creator",
+                "type",
+                "date",
+                "publisher",
+                "publicationTitle",
+                "journalAbbreviation",
+                "language",
+                "accessDate",
+                "libraryCatalog",
+                "callNumber",
+                "rights",
+                "addedBy",
+                "numItems"
+              ],
+              "defaultValue": "dateModified",
+              "description": "The name of the field by which entries are sorted.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "sort"
+            },
+            {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "The sorting direction of the field specified in the sort parameter.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "direction"
+            },
+            {
+              "description": "The maximum number of results to return with a single request",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "allowMultiple": false,
+              "name": "limit"
+            },
+            {
+              "description": "The index of the first result. Combine with the limit parameter to select a slice of the available results",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 0,
+              "minimum": 0,
+              "allowMultiple": false,
+              "name": "start"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "nickname": "getCollections",
+          "summary": "The set of collections in the library.",
+          "type": "Collections",
+          "method": "GET"
+        },
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to post as a group or as an user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "key"
+            },
+            {
+              "name": "body",
+              "description": "The Collection information",
+              "required": true,
+              "type": "Item",
+              "paramType": "body",
+              "defaultValue": "[\n  {\n    \"name\" : \"My Collection\",\n    \"parentCollection\" : false\n  }\n]"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "Ok: The request completed without a general error. See the response JSON for status of individual writes.",
+              "code": 200
+            },
+            {
+              "message": "Conflict: The target library is locked",
+              "code": 409
+            },
+            {
+              "message": "Precondition Failed: The provided Zotero-Write-Token has already been submitted.",
+              "code": 412
+            }
+          ],
+          "nickname": "createCollection",
+          "summary": "Create a collection.",
+          "type": "Collections",
+          "method": "Post"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/collections"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "key"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            },
+            {
+              "description": "Search parameter: Item type search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemType"
+            },
+            {
+              "description": "Search parameter: Quick search. Searches titles and individual creator fields by default. Use the qmode parameter to change the mode. Currently supports phrase searching only.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "q"
+            },
+            {
+              "enum": ["titleCreatorYear", "everything"],
+              "defaultValue": "titleCreatorYear",
+              "description": "Search parameter: Quick search mode. To include full-text content in the search, use everything. Searching of other fields will be possible in the future.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "qmode"
+            },
+            {
+              "description": "Search parameter: Return only objects modified after the specified library verson.",
+              "paramType": "query",
+              "type": "integer",
+              "defaultValue": 0,
+              "required": false,
+              "allowMultiple": false,
+              "name": "since"
+            },
+            {
+              "description": "Search parameter: Tag search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tag"
+            },
+            {
+              "enum": [
+                "dateAdded",
+                "dateModified",
+                "title",
+                "creator",
+                "type",
+                "date",
+                "publisher",
+                "publicationTitle",
+                "journalAbbreviation",
+                "language",
+                "accessDate",
+                "libraryCatalog",
+                "callNumber",
+                "rights",
+                "addedBy",
+                "numItems"
+              ],
+              "defaultValue": "dateModified",
+              "description": "The name of the field by which entries are sorted.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "sort"
+            },
+            {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "The sorting direction of the field specified in the sort parameter.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "direction"
+            },
+            {
+              "description": "The maximum number of results to return with a single request",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "allowMultiple": false,
+              "name": "limit"
+            },
+            {
+              "description": "The index of the first result. Combine with the limit parameter to select a slice of the available results",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 0,
+              "minimum": 0,
+              "allowMultiple": false,
+              "name": "start"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "nickname": "getTopCollections",
+          "summary": "The set of all top-level collections in the library.",
+          "type": "Collections",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/collections/top"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "key"
+            },
+            {
+              "description": "A specific collection in the library",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "collectionKey"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            },
+            {
+              "description": "Search parameter: Item type search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemType"
+            },
+            {
+              "description": "Search parameter: Quick search. Searches titles and individual creator fields by default. Use the qmode parameter to change the mode. Currently supports phrase searching only.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "q"
+            },
+            {
+              "enum": ["titleCreatorYear", "everything"],
+              "defaultValue": "titleCreatorYear",
+              "description": "Search parameter: Quick search mode. To include full-text content in the search, use everything. Searching of other fields will be possible in the future.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "qmode"
+            },
+            {
+              "description": "Search parameter: Return only objects modified after the specified library verson.",
+              "paramType": "query",
+              "type": "integer",
+              "defaultValue": 0,
+              "required": false,
+              "allowMultiple": false,
+              "name": "since"
+            },
+            {
+              "description": "Search parameter: Tag search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tag"
+            },
+            {
+              "enum": [
+                "dateAdded",
+                "dateModified",
+                "title",
+                "creator",
+                "type",
+                "date",
+                "publisher",
+                "publicationTitle",
+                "journalAbbreviation",
+                "language",
+                "accessDate",
+                "libraryCatalog",
+                "callNumber",
+                "rights",
+                "addedBy",
+                "numItems"
+              ],
+              "defaultValue": "dateModified",
+              "description": "The name of the field by which entries are sorted.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "sort"
+            },
+            {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "The sorting direction of the field specified in the sort parameter.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "direction"
+            },
+            {
+              "description": "The maximum number of results to return with a single request",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "allowMultiple": false,
+              "name": "limit"
+            },
+            {
+              "description": "The index of the first result. Combine with the limit parameter to select a slice of the available results",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 0,
+              "minimum": 0,
+              "allowMultiple": false,
+              "name": "start"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "nickname": "getSpecificCollection",
+          "summary": "A specific collection in the library.",
+          "type": "Collections",
+          "method": "GET"
+        },
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to put as a group or as an user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "key"
+            },
+            {
+              "description": "A specific collection in the library",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "collectionKey"
+            },
+            {
+              "name": "body",
+              "description": "First, <a href=\"#!/zotero/getSpecificCollection\" target=\"_blank\">retrieve the current version of the collection</a><br/>The editable data will be found in the data property in the response.<br/>Copy all the data object, edit the values and send it to the server.",
+              "required": true,
+              "type": "Item",
+              "paramType": "body",
+              "defaultValue": "{\n  \"key\" : \"DM2F65CA\",\n  \"version\" : 156,\n  \"name\" : \"My Collection\",\n  \"parentCollection\" : false\n}"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "Ok: The request completed without a general error. See the response JSON for status of individual writes.",
+              "code": 200
+            },
+            {
+              "message": "Conflict: The target library is locked",
+              "code": 409
+            },
+            {
+              "message": "Precondition Failed: The provided Zotero-Write-Token has already been submitted.",
+              "code": 412
+            }
+          ],
+          "nickname": "updateCollection",
+          "summary": "Doesn't Work - Modify a specific collection in the library.",
+          "type": "Collections",
+          "method": "Put"
+        },
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to put as a group or as an user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "key"
+            },
+            {
+              "description": "A specific collection in the library",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "collectionKey"
+            },
+            {
+              "name": "If-Unmodified-Since-Version",
+              "description": "Collection's current version number",
+              "required": true,
+              "type": "integer",
+              "paramType": "header"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "Ok: The request completed without a general error. See the response JSON for status of individual writes.",
+              "code": 200
+            },
+            {
+              "message": "Conflict: The target library is locked",
+              "code": 409
+            },
+            {
+              "message": "Precondition Failed: The provided Zotero-Write-Token has already been submitted.",
+              "code": 412
+            }
+          ],
+          "nickname": "deleteCollection",
+          "summary": "Doesn't Work - delete a specific collection in the library.",
+          "type": "Collections",
+          "method": "Delete"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/collections/{collectionKey}"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "key"
+            },
+            {
+              "description": "A specific collection in the library",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "collectionKey"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            },
+            {
+              "description": "Search parameter: Item type search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemType"
+            },
+            {
+              "description": "Search parameter: Quick search. Searches titles and individual creator fields by default. Use the qmode parameter to change the mode. Currently supports phrase searching only.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "q"
+            },
+            {
+              "enum": ["titleCreatorYear", "everything"],
+              "defaultValue": "titleCreatorYear",
+              "description": "Search parameter: Quick search mode. To include full-text content in the search, use everything. Searching of other fields will be possible in the future.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "qmode"
+            },
+            {
+              "description": "Search parameter: Return only objects modified after the specified library verson.",
+              "paramType": "query",
+              "type": "integer",
+              "defaultValue": 0,
+              "required": false,
+              "allowMultiple": false,
+              "name": "since"
+            },
+            {
+              "description": "Search parameter: Tag search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tag"
+            },
+            {
+              "enum": [
+                "dateAdded",
+                "dateModified",
+                "title",
+                "creator",
+                "type",
+                "date",
+                "publisher",
+                "publicationTitle",
+                "journalAbbreviation",
+                "language",
+                "accessDate",
+                "libraryCatalog",
+                "callNumber",
+                "rights",
+                "addedBy",
+                "numItems"
+              ],
+              "defaultValue": "dateModified",
+              "description": "The name of the field by which entries are sorted.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "sort"
+            },
+            {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "The sorting direction of the field specified in the sort parameter.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "direction"
+            },
+            {
+              "description": "The maximum number of results to return with a single request",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "allowMultiple": false,
+              "name": "limit"
+            },
+            {
+              "description": "The index of the first result. Combine with the limit parameter to select a slice of the available results",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 0,
+              "minimum": 0,
+              "allowMultiple": false,
+              "name": "start"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "nickname": "getSpecificCollectionSubCollections",
+          "summary": "The set of subcollections within a specific collection in the library.",
+          "type": "Collections",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/collections/{collectionKey}/collections"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "key"
+            },
+            {
+              "description": "A specific collection in the library",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "collectionKey"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            },
+            {
+              "description": "Search parameter: Item type search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemType"
+            },
+            {
+              "description": "Search parameter: Quick search. Searches titles and individual creator fields by default. Use the qmode parameter to change the mode. Currently supports phrase searching only.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "q"
+            },
+            {
+              "enum": ["titleCreatorYear", "everything"],
+              "defaultValue": "titleCreatorYear",
+              "description": "Search parameter: Quick search mode. To include full-text content in the search, use everything. Searching of other fields will be possible in the future.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "qmode"
+            },
+            {
+              "description": "Search parameter: Return only objects modified after the specified library verson.",
+              "paramType": "query",
+              "type": "integer",
+              "defaultValue": 0,
+              "required": false,
+              "allowMultiple": false,
+              "name": "since"
+            },
+            {
+              "description": "Search parameter: Tag search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tag"
+            },
+            {
+              "enum": [
+                "dateAdded",
+                "dateModified",
+                "title",
+                "creator",
+                "type",
+                "date",
+                "publisher",
+                "publicationTitle",
+                "journalAbbreviation",
+                "language",
+                "accessDate",
+                "libraryCatalog",
+                "callNumber",
+                "rights",
+                "addedBy",
+                "numItems"
+              ],
+              "defaultValue": "dateModified",
+              "description": "The name of the field by which entries are sorted.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "sort"
+            },
+            {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "The sorting direction of the field specified in the sort parameter.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "direction"
+            },
+            {
+              "description": "The maximum number of results to return with a single request",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "allowMultiple": false,
+              "name": "limit"
+            },
+            {
+              "description": "The index of the first result. Combine with the limit parameter to select a slice of the available results",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 0,
+              "minimum": 0,
+              "allowMultiple": false,
+              "name": "start"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "nickname": "getSpecificCollectionItems",
+          "summary": "The set of all items within a specific collection in the library.",
+          "type": "Items",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/collections/{collectionKey}/items"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "key"
+            },
+            {
+              "description": "A specific collection in the library",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "collectionKey"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            },
+            {
+              "description": "Search parameter: Item type search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemType"
+            },
+            {
+              "description": "Search parameter: Quick search. Searches titles and individual creator fields by default. Use the qmode parameter to change the mode. Currently supports phrase searching only.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "q"
+            },
+            {
+              "enum": ["titleCreatorYear", "everything"],
+              "defaultValue": "titleCreatorYear",
+              "description": "Search parameter: Quick search mode. To include full-text content in the search, use everything. Searching of other fields will be possible in the future.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "qmode"
+            },
+            {
+              "description": "Search parameter: Return only objects modified after the specified library verson.",
+              "paramType": "query",
+              "type": "integer",
+              "defaultValue": 0,
+              "required": false,
+              "allowMultiple": false,
+              "name": "since"
+            },
+            {
+              "description": "Search parameter: Tag search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tag"
+            },
+            {
+              "enum": [
+                "dateAdded",
+                "dateModified",
+                "title",
+                "creator",
+                "type",
+                "date",
+                "publisher",
+                "publicationTitle",
+                "journalAbbreviation",
+                "language",
+                "accessDate",
+                "libraryCatalog",
+                "callNumber",
+                "rights",
+                "addedBy",
+                "numItems"
+              ],
+              "defaultValue": "dateModified",
+              "description": "The name of the field by which entries are sorted.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "sort"
+            },
+            {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "The sorting direction of the field specified in the sort parameter.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "direction"
+            },
+            {
+              "description": "The maximum number of results to return with a single request",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "allowMultiple": false,
+              "name": "limit"
+            },
+            {
+              "description": "The index of the first result. Combine with the limit parameter to select a slice of the available results",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 0,
+              "minimum": 0,
+              "allowMultiple": false,
+              "name": "start"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "nickname": "getSpecificCollectionTopItems",
+          "summary": "The set of top-level items within a specific collection in the library.",
+          "type": "Items",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/collections/{collectionKey}/items/top"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "key"
+            },
+            {
+              "description": "A specific collection in the library",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "collectionKey"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            },
+            {
+              "description": "Search parameter: Item type search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemType"
+            },
+            {
+              "description": "Search parameter: Quick search. Searches titles and individual creator fields by default. Use the qmode parameter to change the mode. Currently supports phrase searching only.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "q"
+            },
+            {
+              "enum": ["titleCreatorYear", "everything"],
+              "defaultValue": "titleCreatorYear",
+              "description": "Search parameter: Quick search mode. To include full-text content in the search, use everything. Searching of other fields will be possible in the future.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "qmode"
+            },
+            {
+              "description": "Search parameter: Return only objects modified after the specified library verson.",
+              "paramType": "query",
+              "type": "integer",
+              "defaultValue": 0,
+              "required": false,
+              "allowMultiple": false,
+              "name": "since"
+            },
+            {
+              "description": "Search parameter: Tag search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tag"
+            },
+            {
+              "enum": [
+                "dateAdded",
+                "dateModified",
+                "title",
+                "creator",
+                "type",
+                "date",
+                "publisher",
+                "publicationTitle",
+                "journalAbbreviation",
+                "language",
+                "accessDate",
+                "libraryCatalog",
+                "callNumber",
+                "rights",
+                "addedBy",
+                "numItems"
+              ],
+              "defaultValue": "dateModified",
+              "description": "The name of the field by which entries are sorted.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "sort"
+            },
+            {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "The sorting direction of the field specified in the sort parameter.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "direction"
+            },
+            {
+              "description": "The maximum number of results to return with a single request",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "allowMultiple": false,
+              "name": "limit"
+            },
+            {
+              "description": "The index of the first result. Combine with the limit parameter to select a slice of the available results",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 0,
+              "minimum": 0,
+              "allowMultiple": false,
+              "name": "start"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "nickname": "getSpecificCollectionTags",
+          "summary": "The set of tags within a specific collection in the library.",
+          "type": "Tags",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/collections/{collectionKey}/tags"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "key"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            },
+            {
+              "description": "Search parameter: Item type search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "itemType"
+            },
+            {
+              "description": "Search parameter: Quick search. Searches titles and individual creator fields by default. Use the qmode parameter to change the mode. Currently supports phrase searching only.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "q"
+            },
+            {
+              "enum": ["titleCreatorYear", "everything"],
+              "defaultValue": "titleCreatorYear",
+              "description": "Search parameter: Quick search mode. To include full-text content in the search, use everything. Searching of other fields will be possible in the future.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "qmode"
+            },
+            {
+              "description": "Search parameter: Return only objects modified after the specified library verson.",
+              "paramType": "query",
+              "type": "integer",
+              "defaultValue": 0,
+              "required": false,
+              "allowMultiple": false,
+              "name": "since"
+            },
+            {
+              "description": "Search parameter: Tag search. It supports <a href=\"https://www.zotero.org/support/dev/web_api/v3/basics#search_syntax\" target=\"_blank\">the boolean search</a>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tag"
+            },
+            {
+              "enum": [
+                "dateAdded",
+                "dateModified",
+                "title",
+                "creator",
+                "type",
+                "date",
+                "publisher",
+                "publicationTitle",
+                "journalAbbreviation",
+                "language",
+                "accessDate",
+                "libraryCatalog",
+                "callNumber",
+                "rights",
+                "addedBy",
+                "numItems"
+              ],
+              "defaultValue": "dateModified",
+              "description": "The name of the field by which entries are sorted.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "sort"
+            },
+            {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "The sorting direction of the field specified in the sort parameter.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "direction"
+            },
+            {
+              "description": "The maximum number of results to return with a single request",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "allowMultiple": false,
+              "name": "limit"
+            },
+            {
+              "description": "The index of the first result. Combine with the limit parameter to select a slice of the available results",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 0,
+              "minimum": 0,
+              "allowMultiple": false,
+              "name": "start"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "nickname": "getSearches",
+          "summary": "The set of all saved searches in the library.",
+          "type": "Searches",
+          "method": "GET"
+        },
+
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "key"
+            },
+            {
+              "name": "body",
+              "description": "First, <a href=\"#!/zotero/getSpecificItem\" target=\"_blank\">retrieve the current version of the item</a><br/>The editable data will be found in the data property in the response.<br/>Copy all the data object, edit the values and send it to the server.",
+              "required": true,
+              "type": "Search",
+              "paramType": "body",
+              "defaultValue": "[\n  {\n    \"name\": \"My Search\",\n    \"conditions\": [\n      {\n        \"condition\": \"title\",\n        \"operator\": \"contains\",\n        \"value\": \"foo\"\n      },\n      {\n        \"condition\": \"date\",\n        \"operator\": \"isInTheLast\",\n        \"value\": \"7 days\"\n      }\n    ]\n  }\n]"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "nickname": "createSearch",
+          "summary": "Create a new search.",
+          "type": "Searches",
+          "method": "Post"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/searches"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "Do you whant to make a search on a group or a user ?",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "users_or_groups",
+              "enum": [
+                "users",
+                "groups"
+              ]
+            },
+            {
+              "defaultValue": "",
+              "description": "<ul><li>If \"groups\": the group Id (ex: 303941 for cowaboo group id)</li><li>If \"users\": the User IDs are different from usernames and can be found on the <a target=\"_blank\" href=\"https://www.zotero.org/settings/keys\">API Keys page</a> and in OAuth responses. (ex: 2214605 for stadja user id)</li></ul>",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "elementId"
+            },
+            {
+              "description": "The zotero Api key. It is a key to which bearer you'll grant permission to write in the user or group library. <a href=\"https://www.zotero.org/settings/keys\" target=\"blank\">This key can be created or found in your settings</a> (it is called \"private key\").<br/>For the Cowaboo user it is 3k89ouyqI6vYIkTsgPJTK4ek",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "key"
+            },
+            {
+              "description": "A specific saved search in the library.",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "searchKey"
+            },
+            {
+              "enum": [
+                "json"
+              ],
+              "description": "Answer format.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "format"
+            },
+            {
+              "enum": [
+                "dateAdded",
+                "dateModified",
+                "title",
+                "creator",
+                "type",
+                "date",
+                "publisher",
+                "publicationTitle",
+                "journalAbbreviation",
+                "language",
+                "accessDate",
+                "libraryCatalog",
+                "callNumber",
+                "rights",
+                "addedBy",
+                "numItems"
+              ],
+              "defaultValue": "dateModified",
+              "description": "The name of the field by which entries are sorted.",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "sort"
+            },
+            {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "description": "The sorting direction of the field specified in the sort parameter.",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "direction"
+            },
+            {
+              "description": "The maximum number of results to return with a single request",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "allowMultiple": false,
+              "name": "limit"
+            },
+            {
+              "description": "The index of the first result. Combine with the limit parameter to select a slice of the available results",
+              "paramType": "query",
+              "required": false,
+              "type": "integer",
+              "defaultValue": 0,
+              "minimum": 0,
+              "allowMultiple": false,
+              "name": "start"
+            }
+          ],
+          "responseMessages": [
+            {
+              "message": "Not Modified",
+              "code": 304
+            },
+            {
+              "message": "Bad Request",
+              "code": 400
+            },
+            {
+              "message": "Forbidden",
+              "code": 403
+            },
+            {
+              "message": "Not Found",
+              "code": 404
+            },
+            {
+              "message": "Method Not Allowed",
+              "code": 405
+            },
+            {
+              "message": "Precondition Failed",
+              "code": 412
+            },
+            {
+              "message": "Expectation Failed",
+              "code": 417
+            },
+            {
+              "message": "Precondition Required",
+              "code": 428
+            },
+            {
+              "message": "Too Many Requests",
+              "code": 429
+            },
+            {
+              "message": "Internal Server Error",
+              "code": 500
+            },
+            {
+              "message": "Service Unavailable",
+              "code": 503
+            }
+          ],
+          "nickname": "getSpecificSearch",
+          "summary": "A specific saved search in the library.",
+          "type": "Search",
+          "method": "GET"
+        }
+      ],
+      "path": "/{users_or_groups}/{elementId}/searches/{searchKey}"
+    }
+  ],
+  "resourcePath": "/items",
+  "consumes": [
+    "application/json",
+    "application/xml"
+  ]
+}
