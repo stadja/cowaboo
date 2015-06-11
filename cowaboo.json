@@ -42,7 +42,6 @@
               "type": "string",
               "allowMultiple": false,
               "name": "diigo_access_key",
-              "defaultValue": "basic Y293YWJvbzpQYXNzd29yZCA0IGNvd2Fib28=",
               "defaultValue": "cowaboo"
             },
             {
@@ -113,7 +112,6 @@
               "type": "string",
               "allowMultiple": false,
               "name": "diigo_access_key",
-              "defaultValue": "basic Y293YWJvbzpQYXNzd29yZCA0IGNvd2Fib28=",
               "defaultValue": "cowaboo"
             },
             {
@@ -176,7 +174,7 @@
               "required": false,
               "type": "string",
               "allowMultiple": false,
-              "name": "desc"
+              "name": "description"
             }
           ],
           "nickname": "createBookmarks",
@@ -255,6 +253,112 @@
         }
       ],
       "path": "/tags"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "the comma separated list of services from which you want to get the related tag information: <br/><ul><li>\"diigo\": related tags</li><li>\"wikipedia\": related articles</li></ul>",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": true,
+              "name": "tag_services",
+              "enum": [
+                "diigo",
+                "wikipedia"
+              ],
+              "defaultValue": "diigo,wikipedia"
+            },
+            {
+              "description": "the pace separated list of tags from which you want to find the related ones",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tag"
+            }
+          ],
+          "nickname": "getRelatedTagInformation",
+          "notes": "",
+          "responseMessages": [],
+          "summary": "Get related Tag information",
+          "type": "TagInformation",
+          "method": "GET"
+        }
+      ],
+      "path": "/tags/infos"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "the comma separated list of services from which you want to get the related groups",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": true,
+              "name": "group_services",
+              "enum": [
+                "zotero"
+              ],
+              "defaultValue": "zotero"
+            },
+            {
+              "description": "the pace separated list of tags from which you want to find the related groups",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tag"
+            }
+          ],
+          "nickname": "getRelatedGroups",
+          "notes": "",
+          "responseMessages": [],
+          "summary": "Get tag related groups",
+          "type": "GroupInformation",
+          "method": "GET"
+        }
+      ],
+      "path": "/tags/groups"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "the comma separated list of services from which you want to get the related users",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": true,
+              "name": "user_services",
+              "enum": [
+                "zotero"
+              ],
+              "defaultValue": "zotero"
+            },
+            {
+              "description": "the pace separated list of tags from which you want to find the related users",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tag"
+            }
+          ],
+          "nickname": "getRelatedUsers",
+          "notes": "",
+          "responseMessages": [],
+          "summary": "Get tag related users",
+          "type": "UserInformation",
+          "method": "GET"
+        }
+      ],
+      "path": "/tags/users"
     }
   ],
   "basePath": "http://stadja.net:81/rest/cowaboo",
@@ -263,16 +367,12 @@
       "id": "Bookmarks",
       "properties": {
         "merged": {
-          "items": {
-            "$ref": "Bookmark"
-          },
+          "items": {},
           "required": true,
           "type": "array"
         },
         "unmerged": {
-          "items": {
-            "$ref": "service specific bookmarks"
-          },
+          "items": {},
           "required": true,
           "type": "array"
         }

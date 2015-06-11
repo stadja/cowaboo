@@ -90,9 +90,8 @@
               "paramType": "header",
               "required": false,
               "type": "string",
-              "allowMultiple": false,
               "name": "Authorization",
-              "defaultValue": "<pre>basic Y293YWJvbzpQYXNzd29yZCA0IGNvd2Fib28=</pre>"
+              "defaultValue": "basic Y293YWJvbzpQYXNzd29yZCA0IGNvd2Fib28="
             },
             {
               "description": "the start offset of the bookmarks to fetch starting from 0, defaults to 0",
@@ -207,9 +206,8 @@
               "paramType": "header",
               "required": false,
               "type": "string",
-              "allowMultiple": false,
               "name": "Authorization",
-              "defaultValue": "<pre>basic Y293YWJvbzpQYXNzd29yZCA0IGNvd2Fib28=</pre>"
+              "defaultValue": "basic Y293YWJvbzpQYXNzd29yZCA0IGNvd2Fib28="
             },
             {
               "description": "1-250, the title of the bookmark",
@@ -328,6 +326,27 @@
         }
       ],
       "path": "/diigoRss/user_tag/{user}"
+    },
+    {
+      "operations": [
+        {
+          "nickname": "getTagStream",
+          "summary": "Returns a stream of related subject to the tag",
+          "method": "GET",
+          "parameters": [
+            {
+              "description": "the tag from which you want to get the stream",
+              "paramType": "path",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tag"
+            }
+          ],
+          "responseMessages": []
+        }
+      ],
+      "path": "/diigoRss/tag/{tag}?tag=151"
     }
   ],
   "consumes": [
