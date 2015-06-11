@@ -359,6 +359,41 @@
         }
       ],
       "path": "/tags/users"
+    },
+    {
+      "operations": [
+        {
+          "parameters": [
+            {
+              "description": "the comma separated list of services from which you want to get the related public bookmarks",
+              "paramType": "query",
+              "required": false,
+              "type": "string",
+              "allowMultiple": true,
+              "name": "bookmark_services",
+              "enum": [
+                "diigo"
+              ],
+              "defaultValue": "diigo"
+            },
+            {
+              "description": "the pace separated list of tags from which you want to find the related public bookmarks",
+              "paramType": "query",
+              "required": true,
+              "type": "string",
+              "allowMultiple": false,
+              "name": "tag"
+            }
+          ],
+          "nickname": "getRelatedBookmarks",
+          "notes": "",
+          "responseMessages": [],
+          "summary": "Get tag related public bookmarks",
+          "type": "bookmarks",
+          "method": "GET"
+        }
+      ],
+      "path": "/tags/bookmarks"
     }
   ],
   "basePath": "http://stadja.net:81/rest/cowaboo",
